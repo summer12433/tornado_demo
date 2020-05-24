@@ -9,6 +9,7 @@ from pycket.session import SessionMixin
 import os
 from models.auth import Post
 from models.db import session
+from handlers.users import RegisterHandler
 
 class BaseHandler(SessionMixin, tornado.web.RequestHandler):
     def get_current_user(self):
@@ -22,6 +23,7 @@ class IndexHandler(tornado.web.RequestHandler):
     """
     def get(self):
         posts = session.query(Post).all()  # 获取所有的图片
+
         return self.render("index.html", posts=posts)
 
 class ExporeHandler(tornado.web.RequestHandler):

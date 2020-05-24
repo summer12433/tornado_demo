@@ -10,6 +10,7 @@ import tornado.options
 from tornado.options import define, options   #导入manage.py命令行
 from handlers.main import IndexHandler, ExporeHandler, PostHandler, UpdateHandler
 from handlers.users import RegisterHandler, LoginHandler
+from handlers.photo import PhotographyHandler, TravelHandler, FashionHandler, AboutHandler, ContactHandler
 
 
 
@@ -18,12 +19,17 @@ define("port", default="8888", help="Listening port", type=int)     #配置信�
 class Application(tornado.web.Application):  #继承tornado.web.Application
     def __init__(self):     #重写初始化类
         handlers = [        #路由
-            (r"/", IndexHandler),
-            (r"/expore", ExporeHandler),
-            (r"/post/(?P<post_id>[0-9]+)", PostHandler),
-            (r"/register", RegisterHandler),
-            (r"/login", LoginHandler),
-            (r"/update", UpdateHandler),
+            (r"/", IndexHandler),       #首页
+            (r"/expore", ExporeHandler),    #最近上传页面
+            (r"/post/(?P<post_id>[0-9]+)", PostHandler),    #图片详情
+            (r"/register", RegisterHandler),    #注册
+            (r"/login", LoginHandler),      #登录
+            (r"/update", UpdateHandler),    #图片上传
+            (r"/photo", PhotographyHandler),    #摄影
+            (r"/travel", TravelHandler),    #旅行
+            (r"/fashion", FashionHandler),    #时尚
+            (r"/about", AboutHandler),    #关于我
+            (r"/contact", ContactHandler),    #联系我
         ]
         settings = dict(    #配置文件
             debug=True,
