@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}
+首页
+{% end %}
+
+{% block body %}
+    {% for p in posts %}
+        <p><img src="{{ static_url(p.image_url) }}" alt=""></p>
+
+    {% end %}
+{% end %}
+
+
+
+
+
+
+
+
+

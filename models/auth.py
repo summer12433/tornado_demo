@@ -37,9 +37,10 @@ class User(Base, BaseModels):       #用户表
         user = User(username=username, password=password, **kwargs)
         session.add(user)
         session.commit()
+        session.close()
 
 
-    @classmethod            #调用User类本身
+    @classmethod            #调用User类本身,查询user表
     def check_username(cls, username):
         return session.query(cls).filter_by(username=username).first()    #类本身进行查询
 
@@ -61,6 +62,13 @@ class Post(Base, BaseModels):      #图片表
     def __repr__(self):
         return "Post:user_id={}".format(self.user_id)
 
+    @classmethod
+    def add_post(cls, image_url, username):
+        user = User.check_username(username)    #fanhui user实例
+        post = Post(image_url=image_url, user_id=user.id)
+        session.add(post)
+        session.commit()
+        session.close()
 
 
 
