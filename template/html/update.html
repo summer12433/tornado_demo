@@ -1,50 +1,58 @@
 {% extends "base.html" %}
 
 {% block title %}
-详情页
+    图片上传
 {% end %}
 
 {% block main %}
-
-
-
-<section class="ftco-section">
+    <section class="ftco-section">
 	    	<div class="container">
 	    		<div class="row">
 	    			<div class="col-lg-8 ftco-animate">
-	            <h2 class="mb-3 font-weight-bold">图片分享</h2>
-
-	            <div class="pt-5 mt-5">
-                <div class="tag-widget post-tag-container mb-5 mt-5">
+	            <h2 class="mb-3 font-weight-bold">资源分享</h2>
+	            <div class="tag-widget post-tag-container mb-5 mt-5">
+                    <h4 class="mb-5 font-weight-bold">标签选择</h4>
 	              <div class="tagcloud">
-                      <h2 class="mb-3 font-weight-bold">请选择分类</h2>
-                      {% for t in posttype_all %}
-	                <a href="#" class="tag-cloud-link">{{ t.name }}</a>
-	                    {% end %}
+                      {% for tag in post_tag %}
+	                <a href="#" class="tag-cloud-link" id="{{ tag.id }}">{{ tag.name }}</a>
+                    {% end %}
 	              </div>
 	            </div>
 
 
+
+	            <div class="pt-5 mt-5">
+
+	              <!-- END comment-list <h3 class="mb-5 font-weight-bold">6 Comments</h3>-->
+
 	              <div class="comment-form-wrap pt-5">
-	                <h3 class="mb-5">发表</h3>
-	                <form action="" enctype="multipart/form-data" method="post" class="p-3 p-md-5 bg-light">
-                        {% module xsrf_form_html() %}
+	                <h3 class="mb-5">发 表</h3>
+
+	                <form action="#" class="p-3 p-md-5 bg-light">
 	                  <div class="form-group">
-	                    <label for="name">标题*</label>
-	                    <input type="text" name="title" class="form-control" id="name">
+	                    <label for="name">标题 *</label>
+	                    <input type="text" class="form-control" id="title">
 	                  </div>
 	                  <div class="form-group">
-	                    <label for="email">图片 *</label>
-	                    <input type="file" name="image_file" class="form-control" id="email">
+	                    <label for="website">上传图片</label>
+	                    <input type="file" class="form-control" id="image_file">
+	                    <!-- <input type="button" class="form-control btn py-1 px-1 btn-primary" id="image_btn" value="图片上传"> -->
+
 	                  </div>
 
+                      <div class="form-group">
+	                    <label for="website">类别:</label>
+                        <p class="tag_look">
+
+	                    </p>
+                      </div>
 
 	                  <div class="form-group">
-	                    <label for="message">内容</label>
+	                    <label for="message">介绍</label>
 	                    <textarea name="content" id="message" cols="30" rows="10" class="form-control"></textarea>
 	                  </div>
 	                  <div class="form-group">
-	                    <input type="submit" value="发布图片" class="btn py-3 px-4 btn-primary">
+	                    <input type="button" id="submit" value="上&emsp;传" class="btn py-3 px-4 btn-primary">
 	                  </div>
 
 	                </form>
@@ -74,7 +82,7 @@
 	            <div class="sidebar-box ftco-animate">
 	              <h3 class="sidebar-heading">Popular Articles</h3>
 	              <div class="block-21 mb-4 d-flex">
-	                <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
+	                <a class="blog-img mr-4" style="background-image: url({{ static_url("images/image_1.jpg") }});"></a>
 	                <div class="text">
 	                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control</a></h3>
 	                  <div class="meta">
@@ -85,7 +93,7 @@
 	                </div>
 	              </div>
 	              <div class="block-21 mb-4 d-flex">
-	                <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
+	                <a class="blog-img mr-4" style="background-image: url({{ static_url("images/image_2.jpg") }});"></a>
 	                <div class="text">
 	                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control</a></h3>
 	                  <div class="meta">
@@ -96,7 +104,7 @@
 	                </div>
 	              </div>
 	              <div class="block-21 mb-4 d-flex">
-	                <a class="blog-img mr-4" style="background-image: url(images/image_3.jpg);"></a>
+	                <a class="blog-img mr-4" style="background-image: url({{ static_url("images/image_3.jpg") }});"></a>
 	                <div class="text">
 	                  <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control</a></h3>
 	                  <div class="meta">
@@ -109,20 +117,20 @@
 	            </div>
 
 	            <div class="sidebar-box ftco-animate">
-	              <h3 class="sidebar-heading">Tag Cloud</h3>
+	              <h3 class="sidebar-heading">标签云</h3>
 	              <ul class="tagcloud">
-	                <a href="#" class="tag-cloud-link">animals</a>
-	                <a href="#" class="tag-cloud-link">human</a>
-	                <a href="#" class="tag-cloud-link">people</a>
-	                <a href="#" class="tag-cloud-link">cat</a>
-	                <a href="#" class="tag-cloud-link">dog</a>
-	                <a href="#" class="tag-cloud-link">nature</a>
-	                <a href="#" class="tag-cloud-link">leaves</a>
-	                <a href="#" class="tag-cloud-link">food</a>
+	                <a href="#" class="tag-cloud-link">动物</a>
+	                <a href="#" class="tag-cloud-link">人</a>
+	                <a href="#" class="tag-cloud-link">猫</a>
+	                <a href="#" class="tag-cloud-link">狗</a>
+	                <a href="#" class="tag-cloud-link">树叶</a>
+	                <a href="#" class="tag-cloud-link">餐饮</a>
+	                <a href="#" class="tag-cloud-link">生活</a>
+	                <a href="#" class="tag-cloud-link">运动</a>
 	              </ul>
 	            </div>
 
-							<div class="sidebar-box subs-wrap img" style="background-image: url(images/bg_1.jpg);">
+							<div class="sidebar-box subs-wrap img" style="background-image: url({{ static_url("images/bg_1.jpg") }});">
 								<div class="overlay"></div>
 								<h3 class="mb-4 sidebar-heading">Newsletter</h3>
 								<p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia</p>
@@ -155,11 +163,8 @@
 	    		</div>
 	    	</div>
 	    </section>
-
-
-
-
 {% end %}
 
-
-
+{% block script %}
+    <script src="{{ static_url("update/tag.js") }}"></script>
+{% end %}
