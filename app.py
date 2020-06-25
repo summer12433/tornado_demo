@@ -62,4 +62,4 @@ if __name__ == "__main__":
     tornado.options.parse_command_line()    #命令行
     application = Application()       #实例化类
     application.listen(options.port)    #绑定端口
-    tornado.ioloop.IOLoop.current().start()
+    tornado.ioloop.IOLoop.current().start()     #开启服务

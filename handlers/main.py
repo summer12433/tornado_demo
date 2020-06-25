@@ -3,6 +3,8 @@
 # @Author  : summer
 # @File    : main.py
 import uuid
+from tornado import gen
+from tornado.httpclient import AsyncHTTPClient
 
 import tornado.web      #导入web接口
 from PIL import Image
@@ -16,6 +18,14 @@ class BaseHandler(SessionMixin, tornado.web.RequestHandler):
     def get_current_user(self):
         return self.session.get("user")
 
+@gen.coroutine
+def asy_update():
+    # yield gen.sleep(5)
+    # http_client = AsyncHTTPClient()     #异步HTTP客户端对象
+    # response = yield http_client.fetch(url)     #获取异步结果
+    # raise gen.Return(response)
+    posttype_all = session.query(PostType).all()
+    raise gen.Return(posttype_all)
 
 
 class IndexHandler(BaseHandler):
@@ -51,10 +61,16 @@ class UpdateHandler(BaseHandler):
     """
     图片上传
     """
+    @gen.coroutine
     @tornado.web.authenticated      #用户必须登录 装饰器
     def get(self):
-        posttype_all = session.query(PostType).all()
+        # response = yield asy_update("http://47.100.201.79:8888/update")
+        # return self.write(response.body)
+        # posttype_all = session.query(PostType).all()
+        # return self.render("update.html", posttype_all=posttype_all)
+        posttype_all = yield asy_update()
         return self.render("update.html", posttype_all=posttype_all)
+
 
     @tornado.web.authenticated
     def post(self):
